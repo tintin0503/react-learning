@@ -53,6 +53,7 @@ const Tab = styled.button`
   transition: ease border-bottom 250ms;
   ${({ active }) => active && `
     border-bottom: 2px solid black;
+    background: green;
     opacity: 1;
   `}
 `;
@@ -100,7 +101,7 @@ function clickMe() {
 const Buttons = () => {
   return (
     <div>
-      <h2> Buttons styled components</h2>
+      <h2> 1. Buttons styled components</h2>
       <div>
         <Button onClick={clickMe}>Button</Button>
       </div>
