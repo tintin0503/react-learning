@@ -1,4 +1,4 @@
-import { FC, useEffect } from 'react'
+import { FC, memo, useEffect } from 'react'
 import Task from './Task'
 
 export type Todo = {
@@ -13,7 +13,7 @@ interface Props {
 const List: FC<Props> = ({ todoList }) => {
   useEffect(() => {
     // This effect is executed every new render
-    console.log('Rendering <List />')
+    // console.log('Rendering <List />')
   })
   return (
     <ul>
@@ -24,4 +24,4 @@ const List: FC<Props> = ({ todoList }) => {
   )
 }
 
-export default List
+export default memo(List)

@@ -1,4 +1,4 @@
-import React, { ChangeEvent, useEffect, useState } from 'react'
+import React, { ChangeEvent, useEffect, useMemo, useState } from 'react'
 import logo from './logo.svg'
 import './App.css'
 import List, { Todo } from './components/List'
@@ -11,6 +11,7 @@ const initialTodos: Todo[] = [
 function App() {
   const [todoList, setTodoList] = useState<Todo[]>(initialTodos)
   const [task, setTask] = useState<string>('')
+  const [term, setTerm] = useState('')
 
   useEffect(() => {
     console.log('Rendering <App />')
@@ -29,6 +30,17 @@ function App() {
     }
   }
 
+  const handleSearch = () => {
+    setTerm(task)
+  }
+  const filteredTodoList = useMemo(
+    () =>
+      todoList.filter(todo => {
+        console.log('Filtering...')
+        return todo.task.toLowerCase().includes(term.toLowerCase())
+      }),
+    [todoList, term]
+  )
   return (
     <>
       <input
@@ -37,7 +49,8 @@ function App() {
         onChange={(e: ChangeEvent<HTMLInputElement>) => setTask(e.target.value)}
       />
       <button onClick={handleCreate}>Create</button>
-      <List todoList={todoList} />
+      <button onClick={handleSearch}>Search</button>
+      <List todoList={!!term ? filteredTodoList : todoList} />
     </>
   )
 }

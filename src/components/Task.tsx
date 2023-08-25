@@ -1,4 +1,4 @@
-import { FC, useEffect } from 'react'
+import { FC, memo, useEffect } from 'react'
 
 interface Props {
   id: number
@@ -7,10 +7,10 @@ interface Props {
 
 const Task: FC<Props> = ({ task }) => {
   useEffect(() => {
-    console.log('Rendering <Task />', task)
+    // console.log('Rendering <Task />', task)
   })
 
   return <li>{task}</li>
 }
 
-export default Task
+export default memo(Task)
