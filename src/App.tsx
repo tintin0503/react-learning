@@ -1,4 +1,4 @@
-import React, { ChangeEvent, useEffect, useMemo, useState } from 'react'
+import React, { ChangeEvent, useCallback, useEffect, useMemo, useState } from 'react'
 import logo from './logo.svg'
 import './App.css'
 import List, { Todo } from './components/List'
@@ -41,6 +41,24 @@ function App() {
       }),
     [todoList, term]
   )
+
+  const handleDelete = useCallback(
+    (taskId: number) => {
+      console.log('handleDelete....')
+      const newTodoList = todoList.filter(todo => todo.id !== taskId)
+      setTodoList(newTodoList)
+    },
+    [todoList]
+  )
+
+  const printTodoList = useCallback(() => {
+    console.log('Changeing todoList', todoList)
+  }, [todoList])
+
+  useEffect(() => {
+    printTodoList()
+  }, [todoList, printTodoList])
+
   return (
     <>
       <input
@@ -50,7 +68,7 @@ function App() {
       />
       <button onClick={handleCreate}>Create</button>
       <button onClick={handleSearch}>Search</button>
-      <List todoList={!!term ? filteredTodoList : todoList} />
+      <List todoList={!!term ? filteredTodoList : todoList} handleDelete={handleDelete} />
     </>
   )
 }
