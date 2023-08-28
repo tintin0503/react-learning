@@ -1,13 +1,13 @@
-import React, { useEffect } from 'react'
-import logo from './logo.svg'
+import { useEffect } from 'react'
 import './App.css'
+import HomePage from './HomePage'
 
 function App() {
   useEffect(() => {
     console.log('Rendering <App />')
   })
 
-  return <div className="App"></div>
+  return <div><HomePage /></div>
 }
 
 export default App
